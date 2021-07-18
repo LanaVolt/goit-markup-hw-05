@@ -11,10 +11,11 @@
   --primary-background-color: #2f303a;
   --secondary-background-color: #f5f4fa;
   --primary-border-color: 1px solid #ececec;
-  --overlay-colour: rgba(47, 48, 58, 0.4);
-  --small-overlay-colour: rgba(47, 48, 58, 0.8);
+  --primary-overlay-color: rgba(47, 48, 58, 0.4);
+  --secondary-overlay-color: rgba(47, 48, 58, 0.8);
+  --card-overlay-color: rgba(33, 150, 243, 0.9);
 
-  --primary-icon-colour: #afb1b8;
+  --primary-icon-color: #afb1b8;
   --social-icon-background: rgba(255, 255, 255, 0.1);
 
   --card-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
@@ -23,6 +24,8 @@
     0px 2px 2px rgba(0, 0, 0, 0.12);
   --hover-card-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
+
+  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -130,6 +133,7 @@ ul {
 
 .nav-link {
   color: var(--primary-dark-color);
+  transition: color 250ms var(--timing-function);
 }
 
 .nav-link.current {
@@ -138,10 +142,10 @@ ul {
 
 .nav-link.current::after {
   content: '';
-  position: absolute;
-  top: 44px;
   display: block;
   justify-content: center;
+  position: absolute;
+  top: 44px;
   width: 100%;
   height: 4px;
   border-radius: 2px;
@@ -166,6 +170,7 @@ ul {
   display: flex;
   align-items: center;
   color: var(--text-color);
+  transition: color 250ms var(--timing-function);
 }
 
 .contact-link:hover,
@@ -178,6 +183,7 @@ ul {
   height: 12px;
   margin-right: 10px;
   fill: currentColor;
+  transition: fill 250ms var(--timing-function);
 }
 
 .smartphone {
@@ -185,6 +191,7 @@ ul {
   height: 16px;
   margin-right: 10px;
   fill: currentColor;
+  transition: fill 250ms var(--timing-function);
 }
 
 .contact-link:hover .envelope,
@@ -208,7 +215,7 @@ ul {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: linear-gradient(rgba(47, 48, 58, 0.4), rgba(47, 48, 58, 0.4)),
+  background-image: linear-gradient(var(--primary-overlay-color), var(--primary-overlay-color)),
     url(../images/hero/hero-img.jpg);
 }
 
@@ -330,7 +337,7 @@ ul {
   bottom: 0;
   width: 100%;
   height: 70px;
-  background-color: var(--small-overlay-colour);
+  background-color: var(--secondary-overlay-color);
 }
 
 .work-text {
@@ -406,7 +413,8 @@ ul {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  fill: var(--primary-icon-colour);
+  fill: var(--primary-icon-color);
+  transition: fill 250ms var(--timing-function), background-color 250ms var(--timing-function);
 }
 
 .social-link:hover,
@@ -443,8 +451,9 @@ ul {
   justify-content: center;
   width: inherit;
   height: inherit;
-  border: 1px solid var(--primary-icon-colour);
+  border: 1px solid var(--primary-icon-color);
   border-radius: 4px;
+  transition: border 250ms var(--timing-function), fill 250ms var(--timing-function);
 }
 
 .client-link:hover,
@@ -460,7 +469,8 @@ ul {
 
 /* div */
 .client-logo {
-  fill: var(--primary-icon-colour);
+  fill: var(--primary-icon-color);
+  transition: fill 250ms var(--timing-function);
 }
 
 /* ========= END CLIENTS SECTION ========= */
@@ -489,6 +499,8 @@ ul {
   color: var(--primary-dark-color);
   background-color: var(--secondary-background-color);
   cursor: pointer;
+  transition: color 250ms var(--timing-function), background-color 250ms var(--timing-function),
+    box-shadow 250ms var(--timing-function);
 }
 
 .portfolio-button:hover,
@@ -508,6 +520,7 @@ ul {
 
 .example-link {
   display: block;
+  transition: box-shadow 250ms var(--timing-function);
 }
 
 .example-link:hover,
@@ -518,6 +531,36 @@ ul {
 .example {
   margin-top: 30px;
   margin-left: 30px;
+}
+
+.card-img-box {
+  position: relative;
+  overflow: hidden;
+}
+/* div.card-img-box>p.text-overlay */
+
+.text-overlay {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  padding: 62px 24px;
+  overflow: auto;
+
+  font-size: 18px;
+  line-height: 1.56;
+  letter-spacing: 0.03em;
+  color: var(--primary-white);
+  background-color: var(--card-overlay-color);
+
+  transform: translateY(100%);
+  transition: transform 250ms var(--timing-function);
+}
+
+.example-link:hover .text-overlay,
+.example-link:focus .text-overlay {
+  transform: translateY(0);
 }
 
 .example-box {
@@ -577,6 +620,7 @@ ul {
 
 .footer-link {
   color: var(--secondary-white);
+  transition: color 260ms var(--timing-function);
 }
 
 .footer-contact:not(:last-child) {
@@ -614,6 +658,7 @@ ul {
   height: 44px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 250ms var(--timing-function);
 }
 
 .join-logo:not(:last-child) {
